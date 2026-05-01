@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+*.pkl
+*.joblib
+.env
+venv/
+env/
+.venv/
+*.csv
+*.xlsx
+*.pdf
+.DS_Store
+Thumbs.db
