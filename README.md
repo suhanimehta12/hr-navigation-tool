@@ -1,6 +1,6 @@
 # HR Navigator — Workforce Intelligence Platform
 
-An end-to-end AI-powered HR analytics platform covering three core domains: recruitment prediction, attrition risk analysis, and promotion prediction. Built on Streamlit with scikit-learn ML models, matplotlib visualisations, and a PDF export layer.
+HR Navigator is an AI-powered HR analytics platform that helps you understand the full employee lifecycle — from hiring to retention and promotions. It combines machine learning models, interactive dashboards, and simple resume screening tools into one unified system built with Streamlit.
 
 ---
 
@@ -9,20 +9,19 @@ An end-to-end AI-powered HR analytics platform covering three core domains: recr
 ```
 hr-navigator/
 │
-├── app.py                      Main entry point — run this file
+├── app.py                      Main entry point (run this file)
 │
 ├── _pages/
-│   ├── __init__.py
 │   ├── home.py                 Landing page and employee journey overview
-│   ├── recruitment.py          Recruitment dataset training, resume AI screener, department hiring
-│   ├── retention.py            Attrition prediction, life event signals, team dashboard
-│   ├── promotion.py            Promotion eligibility, regret score, department allocation
-│   └── analytics.py            Cross-module platform analytics
+│   ├── recruitment.py          Hiring prediction + resume screening
+│   ├── retention.py            Attrition prediction + risk dashboard
+│   ├── promotion.py            Promotion eligibility and readiness scoring
+│   └── analytics.py            Overall HR insights dashboard
 │
 ├── .streamlit/
-│   └── config.toml             Theme and server configuration
+│   └── config.toml             Theme and configuration
 │
-├── requirements.txt            Python dependencies
+├── requirements.txt            Project dependencies
 ├── .gitignore
 └── README.md
 ```
@@ -31,62 +30,65 @@ hr-navigator/
 
 ## How to run locally
 
-**Step 1 — Confirm Python version**
+### Step 1: Check Python version
 
-Python 3.10 or higher is required.
+Make sure you have Python 3.10 or higher installed.
 
 ```bash
 python --version
 ```
 
-Download from https://www.python.org/downloads/ if needed.
+If not, download it from [https://www.python.org/downloads/](https://www.python.org/downloads/)
 
-**Step 2 — Get the project**
+---
 
-Clone via Git:
+### Step 2: Clone the project
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/hr-navigator.git
 cd hr-navigator
 ```
 
-Or download the ZIP from GitHub and extract it, then open a terminal inside the folder.
+Or download the ZIP and open the folder in a terminal.
 
-**Step 3 — Create a virtual environment**
+---
+
+### Step 3: Create a virtual environment
 
 ```bash
 python -m venv venv
 
-# Activate on Windows:
+# Windows
 venv\Scripts\activate
 
-# Activate on Mac / Linux:
+# Mac/Linux
 source venv/bin/activate
 ```
 
-**Step 4 — Install dependencies**
+---
+
+### Step 4: Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-**Step 5 — Launch the app**
+---
+
+### Step 5: Run the app
 
 ```bash
 streamlit run app.py
 ```
 
-The app opens automatically at http://localhost:8501
+Then open:
+[http://localhost:8501](http://localhost:8501)
 
 ---
 
-## Deploy to Streamlit Cloud (free)
+## Deploy to Streamlit Cloud (free hosting)
 
-Streamlit Cloud hosts your app publicly at no cost and redeploys automatically on every push to GitHub.
-
-**Step 1 — Push to GitHub**
-
-Create a repository at https://github.com/new. Name it `hr-navigator`, set it to Public, then push:
+### Step 1: Push to GitHub
 
 ```bash
 git init
@@ -97,132 +99,141 @@ git remote add origin https://github.com/YOUR_USERNAME/hr-navigator.git
 git push -u origin main
 ```
 
-Replace `YOUR_USERNAME` with your GitHub username.
+---
 
-**Step 2 — Connect to Streamlit Cloud**
+### Step 2: Deploy
 
-1. Go to https://share.streamlit.io and sign in with GitHub
-2. Click **New app**
-3. Set the fields:
-   - Repository: `YOUR_USERNAME/hr-navigator`
-   - Branch: `main`
-   - Main file path: `app.py`
-4. Click **Deploy**
+1. Go to [https://share.streamlit.io](https://share.streamlit.io)
+2. Sign in with GitHub
+3. Click “New app”
+4. Select:
 
-Deployment takes roughly two to three minutes. Your app will be live at a public URL you can share.
+   * Repository: hr-navigator
+   * Branch: main
+   * Main file: app.py
+5. Click Deploy
+
+Your app will be live in a few minutes.
 
 ---
 
-## Datasets
+## Datasets used
 
-Each module expects a specific CSV structure. Sample datasets are linked below.
+### Recruitment
 
-### Recruitment module
+Used for hiring prediction and candidate evaluation.
 
-Required columns:
+Columns:
+Age, Gender, EducationLevel, ExperienceYears, PreviousCompanies, DistanceFromCompany, InterviewScore, SkillScore, RecruitmentStrategy, HiringDecision, PersonalityScore
 
-```
-Age, Gender, EducationLevel, ExperienceYears, PreviousCompanies,
-DistanceFromCompany, InterviewScore, SkillScore, RecruitmentStrategy,
-HiringDecision (0 or 1), PersonalityScore
-```
+Dataset:
+[https://www.kaggle.com/datasets/rabieelkharoua/predicting-hiring-decisions-in-recruitment-data](https://www.kaggle.com/datasets/rabieelkharoua/predicting-hiring-decisions-in-recruitment-data)
 
-Sample dataset: https://www.kaggle.com/datasets/rabieelkharoua/predicting-hiring-decisions-in-recruitment-data
+---
 
-### Retention module
+### Retention
 
-Required columns:
+Used for attrition prediction and employee risk analysis.
 
-```
-Department, JobRole, MaritalStatus, OverTime, JobSatisfaction,
-Age, Attrition (Yes / No)
-```
+Columns:
+Department, JobRole, MaritalStatus, OverTime, JobSatisfaction, Age, Attrition
 
-Sample dataset: https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset
+Dataset:
+[https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset](https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset)
 
-### Promotion module
+---
 
-Required columns:
+### Promotion
 
-```
-employee_id, department, region, education, gender,
-recruitment_channel, no_of_trainings, age, previous_year_rating,
-length_of_service, awards_won, avg_training_score, is_promoted (0 or 1)
-```
+Used for promotion eligibility and readiness scoring.
 
-Sample dataset: https://www.kaggle.com/datasets/arashnic/hr-ana
+Columns:
+employee_id, department, region, education, gender, recruitment_channel, no_of_trainings, age, previous_year_rating, length_of_service, awards_won, avg_training_score, is_promoted
+
+Dataset:
+[https://www.kaggle.com/datasets/arashnic/hr-ana](https://www.kaggle.com/datasets/arashnic/hr-ana)
 
 ---
 
 ## Resume screener
 
-The resume screener accepts plain text files (.txt), one file per candidate.
+The resume screener helps rank candidates based on their resume content.
 
-To use it:
+How to use:
 
-1. Save each resume as a .txt file
-2. Upload all files in the Resume Screener tab
-3. Paste the job description into the text box
-4. The system scores and ranks candidates automatically
+* Upload resumes as `.txt` files
+* Paste the job description
+* Get ranked candidate scores
 
 Example resume format:
 
 ```
 Jane Smith
 7 years experience in data engineering
-Skills: Python, SQL, AWS, Kubernetes, leadership, communication
-Education: Master of Science in Computer Science
-Previous employers: Shopify, Accenture
+Skills: Python, SQL, AWS, Kubernetes, leadership
+Education: Master’s in Computer Science
+Worked at Shopify and Accenture
 ```
 
 ---
 
 ## Key features
 
-| Feature | Module | Description |
-|---|---|---|
-| Culture DNA matching | Recruitment | Matches candidates against a fingerprint built from your top performers, not just a job description |
-| Resume AI screener | Recruitment | Parses plain-text resumes, extracts skills and experience, ranks candidates by JD fit and culture fit |
-| Life event signals | Retention | Applies personal life event multipliers (relocation, new baby, degree completion) to base attrition scores |
-| Early warning dashboard | Retention | Team-level risk overview with colour-coded risk levels and manager-specific recommended actions |
-| Promotion regret score | Promotion | Projects 18-month post-promotion success, not just current eligibility |
-| Readiness timeline | Promotion | States when an employee will be ready for promotion, not just whether they qualify |
-| Platform analytics | All modules | Cross-module summary: hire rate, attrition rate, promotion rate, and full lifecycle connectivity status |
-| PDF export | Retention | Generates a downloadable attrition risk report for individual employees |
+| Feature              | Module      | What it does                                             |
+| -------------------- | ----------- | -------------------------------------------------------- |
+| Culture matching     | Recruitment | Matches candidates with top-performing employee patterns |
+| Resume ranking       | Recruitment | Scores resumes based on job description fit              |
+| Attrition prediction | Retention   | Predicts employees likely to leave                       |
+| Risk dashboard       | Retention   | Highlights high-risk employees for managers              |
+| Promotion scoring    | Promotion   | Predicts promotion readiness and success likelihood      |
+| Readiness timeline   | Promotion   | Shows when an employee may be promotion-ready            |
+| HR analytics         | All modules | Overall hiring, retention, and promotion insights        |
+| PDF reports          | Retention   | Downloadable employee risk reports                       |
 
 ---
 
 ## Tech stack
 
-| Layer | Technology |
-|---|---|
-| Frontend and app server | Streamlit |
-| Machine learning | scikit-learn (Random Forest, Gradient Boosting, Logistic Regression, Decision Tree, SVM) |
-| Data processing | pandas, numpy |
-| Visualisation | matplotlib, seaborn |
-| PDF export | fpdf2 |
-| Deployment | Streamlit Cloud |
+* Streamlit (frontend + backend UI)
+* scikit-learn (ML models)
+* pandas, numpy (data processing)
+* matplotlib (visualization)
+* seaborn (analysis charts)
+* fpdf2 (PDF report generation)
+* Streamlit Cloud (deployment)
 
 ---
 
-## Model selection logic
+## Model logic
 
-Each module trains multiple candidate models on your uploaded dataset and automatically selects the one with the highest accuracy on the held-out test set (20% split). The selected model is stored in session state and used for all subsequent predictions in that session.
+Each module trains multiple machine learning models and automatically selects the best one based on accuracy.
+
+The selected model is stored in session memory and used for predictions during runtime.
 
 ---
 
 ## Common issues
 
-**Missing column error on upload** — confirm your CSV has all required columns listed above. Column names are case-sensitive.
+### Missing columns error
 
-**Encoding error in the promotion predictor** — ensure that the values you select in the dropdowns match values that appear in your uploaded dataset. The encoder cannot handle unseen categories.
+Make sure your dataset includes all required columns with correct spelling.
 
-**Resume screener shows low scores** — the screener parses plain text. If your files contain formatting artifacts from PDF-to-text conversion, clean them before uploading.
+### Encoding error
 
-**App not starting locally** — confirm the virtual environment is active and all packages installed without errors. Run `pip install -r requirements.txt` again if needed.
+Ensure dropdown values match dataset categories exactly.
 
----
+### Low resume score
+
+Clean your resume text before uploading (remove formatting issues from PDFs).
+
+### App not running
+
+Check that your virtual environment is active and dependencies are installed.
+
+
 
 ## Contributing
 
-Open an issue or pull request on GitHub.
+Feel free to fork the repository, raise issues, or submit pull requests. Contributions are always welcome.
+
+
